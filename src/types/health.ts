@@ -1,3 +1,5 @@
 const prefix = 'HEALTH/';
 
-export const RECEIVE = prefix + 'RECEIVE';
+export const RECEIVED = prefix + 'RECEIVED';
+export const REQUESTING = prefix + 'REQUESTING';
+export const FAILED = prefix + 'FAILED';

@@ -58,7 +58,7 @@ app.use(
 // Server manifest with cache headers
 app.use('/manifest.json', (req: any, res: any) => {
   res.sendFile(path.join(__dirname, '../build', 'manifest.json'), {
-    maxAge: '1d'
+    maxAge: '1h'
   });
 });
 

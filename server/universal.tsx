@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
+import { Base64 } from 'js-base64';
 
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
@@ -58,7 +59,7 @@ export default function universalLoader(req: any, res: any) {
         // we're good, send the response
         const RenderedApp = htmlData
           .replace('{{SSR}}', markup)
-          .replace('{{WINDOW_DATA}}', JSON.stringify(storeForClient))
+          .replace('{{WINDOW_DATA}}', Base64.encode(JSON.stringify(storeForClient)))
           .replace('<meta-head/>', headData);
 
         res.status(context.statusCode || 200).send(RenderedApp);
