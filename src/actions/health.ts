@@ -41,11 +41,9 @@ export function requestHealthCheck() {
 
 export function shouldCheck(state: SystemStore) {
   const status = state.system.status;
-  // tslint:disable-next-line:no-console
-  console.log(state);
 
-  if (!status) {
-    return true;
+  if (status === 'ok') {
+    return false;
   }
 
   return true;

@@ -1,7 +1,7 @@
 import { RECEIVE } from '../types/posts';
 
 const initialState = {
-  items: null
+  items: []
 };
 
 export default function reducer(state: any = initialState, action: any) {

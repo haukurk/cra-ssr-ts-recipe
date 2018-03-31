@@ -13,7 +13,7 @@ declare global {
   interface Window { __REDUX_DEVTOOLS_EXTENSION__: any; }
 }
 
-export default function configureStore(initialState: any = {}) {
+export default function configureStore(ssrState: any = {}) {
   const middlewares = [
     thunkMiddleware
   ];
@@ -25,13 +25,10 @@ export default function configureStore(initialState: any = {}) {
     } 
   }
 
-  // tslint:disable-next-line:no-console
-  console.log(initialState);
-
   const store: any = createStore(reducers,
-                                 initialState, 
+                                 ssrState, 
                                  compose(...enhancers));
-
+            
   store.asyncReducers = {}; // Async reducer registry
 
   return store;
