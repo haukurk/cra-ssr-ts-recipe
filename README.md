@@ -2,25 +2,26 @@
 
 *This project is WIP.*
 
-This project was bootstrapped with [Create React App with TypeScript](https://github.com/wmonk/create-react-app-typescript). It has been modified to isomorphic application, equiped with a server to handle server side rendering and providing a RESTful API. The project also shows a draft how to use TypeScript for both server and client side source code.
+This project was bootstrapped with [Create React App with TypeScript](https://github.com/wmonk/create-react-app-typescript). It has been modified to be an isomorphic application, with support to do server side rendering of the React web application (also the Redux state). The project also provides a way to create a RESTful Web API and is a POC to show how to use TypeScript for both server and client side.
 
 ## Developement
 
-When developing you can use ``yarn start`` and use the standard development server that CRA provides, default configuration uses port ``3000``. When the developement server is started an express server is also started that (by default) listenes on port ``3101``, we use the ``proxy`` feature provided by CRA to proxy API calls.
+When developing you can use ``yarn start`` and use the standard development server that CRA provides. To access the development web server you can use port ``3000``. When you run ``yarn start`` a separate server is started that handles SSR and Web API endpoints. This server by default listens on port ``3101``. To proxy API calls when using the development server,  we use the ``proxy`` feature provided by CRA to proxy API calls.
 
-To try out server rendering while developing, simply use port ``3101`` instead of ``3000`` in your browser. 
+To use server rendering while developing, simply use port ``3101`` instead of ``3000`` in your browser. 
 
-*n.b.* you need to run yarn start, again when changing server side code.
+*n.b.* you still need to re-run ``yarn start`` when changing server side code.
 
-## Install (Getting started)
+## Install dependencies
 
 You can simply install dependencies by running ``yarn install``.
 
 ## Server side rendering
 
+Some important infomation related to SSR.
 
 ## Defining required data for SSR
-You explicitly need to add to ``fetchData`` to your components in your routes if you want to side effects before rendering the application.
+You explicitly need to add a function ``fetchData`` to your components, that you include in our React Router routes,if you want to do any prefetching of data before rendering the web application.
 
 Example:
 ```javascript
@@ -36,7 +37,7 @@ class LandingPage extends React.Component<LandingPageProps, {}> {
 
 ## Redux state
 
-Redux state is rendered and attached to ``window.DATA``to read it from the client and preloading the redux state we do: 
+Redux state is rendered and attached to ``window.DATA`` for the client to read it from and to preload the redux state. This is done like the follow code snippet shows:
 
 ```javascript
 import { Base64 } from 'js-base64';
@@ -49,7 +50,7 @@ const initialState = ((window as any).DATA !== null && (window as any).DATA !== 
 
 ``/server/api/`` includes all endpoints for ``/api/*`` routes.
 
-It should be noted that fetch does not work relatively when running on server, a way around this is to do something like:
+It should be noted that ``fetch`` does not work relatively when running on server, a way around this is to do something like:
 
 ```javascript
 var ExecutionEnvironment = require('exenv');
@@ -59,6 +60,8 @@ if (!ExecutionEnvironment.canUseDOM) {
   uriEndpoint = `http://localhost:3101/api/healthy`; 
 }
 ```
+
+If we cuse the DOM, we are running on the client, where relative request work.
 
 ## Acknowledgements 
 
