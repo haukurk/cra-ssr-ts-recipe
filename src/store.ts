@@ -1,19 +1,12 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import reducers from './reducers';
+import reducers, { RootState } from './reducers';
 import thunkMiddleware from 'redux-thunk';
-import { SystemState } from './reducers/system';
-
-export interface SystemStore {
-  system: SystemState;
-  posts: any;
-  comment: any;
-}
 
 declare global {
   interface Window { __REDUX_DEVTOOLS_EXTENSION__: any; }
 }
 
-export default function configureStore(ssrState: any = {}) {
+export default function configureStore(ssrState: RootState | {} = {}) {
   const middlewares = [
     thunkMiddleware
   ];

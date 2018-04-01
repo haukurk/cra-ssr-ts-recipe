@@ -1,20 +1,18 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
-
 import { Link } from 'react-router-dom';
-
 import { isEqual } from 'lodash';
 
 interface PostListProps {
     posts: Array<{ id: number, title: string}>;
 }
 
-class PostList extends React.Component<PostListProps, any> {
+class PostList extends React.Component<PostListProps, {}> {
+  
   shouldComponentUpdate(nextProps: any) {
     if (!isEqual(this.props.posts, nextProps.posts)) {
       return true;
     }
-
     return false;
   }
 

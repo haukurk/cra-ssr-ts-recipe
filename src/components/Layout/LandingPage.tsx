@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-
 import { isEqual } from 'lodash';
 
 interface LandingPageLayoutProps {
@@ -9,11 +8,11 @@ interface LandingPageLayoutProps {
 }
 
 class LandingPageLayout extends React.Component<LandingPageLayoutProps, any> {
+  
   shouldComponentUpdate(nextProps: any) {
     if (!isEqual(this.props.posts, nextProps.posts)) {
       return true;
     }
-
     return false;
   }
 

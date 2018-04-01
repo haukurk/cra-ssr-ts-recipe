@@ -1,13 +1,13 @@
-import { Component } from 'react';
+import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
-class NoMatch extends Component {
+class NoMatch extends React.Component<{}, {}> {
 
-    static contextTypes = {
-        router: PropTypes.shape({
-          staticContext: PropTypes.object
-        }).isRequired
-      };
+  static contextTypes = {
+      router: PropTypes.shape({
+        staticContext: PropTypes.object
+      }).isRequired
+    };
 
   shouldComponentUpdate() {
     return false;

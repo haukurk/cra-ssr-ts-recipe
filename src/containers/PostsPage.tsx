@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
-import PostList from '../components/PostList';
+import PostList from '../components/Layout/PostList';
 
 import { renderRoutes } from 'react-router-config';
 
 import { fetchPostsIfNeeded } from '../actions/posts';
 
-class PostsApiPage extends React.Component<any, any> {
+class PostsPage extends React.Component<any, any> {
   static fetchData(store: any) {
     return store.dispatch(fetchPostsIfNeeded());
   }
@@ -34,8 +34,8 @@ class PostsApiPage extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
-  posts: state.posts.items
+const mapStateToProps = (posts: any) => ({
+  posts: posts.posts.items
 });
 
-export default connect(mapStateToProps)(PostsApiPage);
+export default connect(mapStateToProps)(PostsPage);

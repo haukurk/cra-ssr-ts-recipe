@@ -13,13 +13,25 @@ import App from './containers/App';
 const initialState = ((window as any).DATA !== null && (window as any).DATA !== '{{WINDOW_DATA}}') 
   ? Base64.decode((window as any).DATA) : '{}';
 
-const store = configureStore(JSON.parse(initialState));
+const parsedInitialState = JSON.parse(initialState);
+const store = configureStore(parsedInitialState);
 
-ReactDOM.hydrate(
-  <Provider store={store}>
-  <BrowserRouter>
-      <App />
-  </BrowserRouter>
- </Provider>,
-  document.getElementById('root') as HTMLElement
-);
+if (initialState === '{}') { // Non-server rendered.
+  ReactDOM.render(
+    <Provider store={store}>
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+  </Provider>,
+    document.getElementById('root') as HTMLElement
+  );
+} else { // Server rendered hydration
+  ReactDOM.hydrate(
+    <Provider store={store}>
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+  </Provider>,
+    document.getElementById('root') as HTMLElement
+  );
+}

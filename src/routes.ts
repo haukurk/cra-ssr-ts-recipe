@@ -1,5 +1,5 @@
 import LandingPage from './containers/LandingPage';
-import PostsApiPage from './containers/PostsApiPage';
+import PostsApiPage from './containers/PostsPage';
 import PostComments from './containers/PostComments';
 
 import NoMatch from './components/Layout/NoMatch';

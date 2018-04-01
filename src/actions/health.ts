@@ -1,5 +1,5 @@
 import { RECEIVED, FAILED, REQUESTING } from '../types/health';
-import { SystemStore } from '../store';
+import { RootState } from '../reducers';
 var ExecutionEnvironment = require('exenv');
 
 function successHealthCheck(status: string) {
@@ -39,7 +39,7 @@ export function requestHealthCheck() {
   };
 }
 
-export function shouldCheck(state: SystemStore) {
+export function shouldCheck(state: RootState) {
   const status = state.system.status;
 
   if (status === 'ok') {

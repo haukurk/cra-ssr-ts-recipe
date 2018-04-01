@@ -1,22 +1,21 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-
 import { fetchCommentsIfNeeded } from '../actions/comments';
-
 import { isEqual } from 'lodash';
+import { RootState } from '../reducers';
 
 interface PostCommentsProps {
-    comments: Array<{
-        id: number;
-        email: string;
-        body: string;
-    }>;
+    comments: Array<Comment>;
     dispatch: any;
     match: any;
 }
 
-class PostComments extends React.Component<PostCommentsProps, any> {
+/**
+ * Container for Comments
+ */
+class PostComments extends React.Component<PostCommentsProps, {}> {
 
+   // Dependendency for server side rendering
    static fetchData(store: any, match: any) {
     return store.dispatch(fetchCommentsIfNeeded(match.params.id));
    }
@@ -25,10 +24,12 @@ class PostComments extends React.Component<PostCommentsProps, any> {
     if (!isEqual(this.props.comments, nextProps.comments)) {
       return true;
     }
-
     return false;
   }
 
+  /**
+   * Fetch comments if not already exist. 
+   */
   fetchCommentsData() {
     const { dispatch } = this.props;
     dispatch(fetchCommentsIfNeeded(this.props.match.params.id));
@@ -65,7 +66,7 @@ class PostComments extends React.Component<PostCommentsProps, any> {
   }
 }
 
-const mapStateToProps = (state: any, ownProps: any) => {
+const mapStateToProps = (state: RootState, ownProps: PostCommentsProps) => {
   let byPostMatch = state.comments.byPost[ownProps.match.params.id];
 
   return {
