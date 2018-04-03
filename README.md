@@ -10,7 +10,7 @@ When developing you can use ``yarn start`` and use the standard development serv
 
 To use server rendering while developing, simply use port ``3101`` instead of ``3000`` in your browser. 
 
-*n.b.* you still need to re-run ``yarn start`` when changing server side code.
+*n.b.* you still need to re-run ``yarn start`` when changing server side code (will not be like that in the future).
 
 ## Install dependencies
 
@@ -59,9 +59,13 @@ let uriEndpoint = `/api/healthy`;
 if (!ExecutionEnvironment.canUseDOM) { 
   uriEndpoint = `http://localhost:3101/api/healthy`; 
 }
+
+...
+fetch(uriEndpoint).then(...);
+...
 ```
 
-If we cuse the DOM, we are running on the client, where relative request work.
+If we can use the DOM, then we are running on the client, where relative request work.
 
 ## Acknowledgements 
 
